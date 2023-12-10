@@ -1,0 +1,62 @@
+@font-face {
+ font-family:ibm_vga;
+ src:url(/fonts/PxPlus_IBM_VGA_8x16.ttf) format("truetype");
+ font-weight:400
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48;
+  vertical-align: middle;
+}
+
+.filled-symbols {
+    font-variation-settings: 'FILL' 1;
+}
+
+:root {
+    --pico-font-family-monospace: ibm_vga, monospaced;
+    --pico-font-family: var(--pico-font-family-monospace);
+
+    /* Theme */
+    --pico-text-selection-color: rgba(241, 121, 97, 0.1875);
+    --pico-primary: #f17961;
+    --pico-primary-background: #c52f21;
+    --pico-primary-underline: rgba(241, 121, 97, 0.5);
+    --pico-primary-hover: #f5a390;
+    --pico-primary-hover-background: #d93526;
+    --pico-primary-focus: rgba(241, 121, 97, 0.25);
+    --pico-primary-inverse: #fff;
+
+    --pico-border-radius: 0px;
+    --pico-border-width: 1px;
+    --pico-form-element-border-color: var(--pico-color);
+    --pico-form-element-background-color: var(--pico-background-color);
+    --pico-code-background-color: transparent;
+    --pico-card-background-color: var(--pico-background-color);
+    --pico-card-sectioning-background-color: var(--pico-background-color);
+    --pico-card-border-color: white;
+}
+
+nav {
+    border: double 1px var(--pico-color);
+    outline: double 1px var(--pico-color);
+    outline-offset: -6px;
+}
+
+article {
+    border: 2px solid white;
+}
+
+table button {
+    --pico-form-element-spacing-vertical: 0.2rem;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

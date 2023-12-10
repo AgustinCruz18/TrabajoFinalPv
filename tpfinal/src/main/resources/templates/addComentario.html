@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org" data-theme="dark">
+
+<head>
+    <title>Añadir Comentario</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.0-alpha1/css/pico.min.css"/>
+    <link rel="stylesheet" href="../static/css/global.css" th:href="@{/css/global.css}">
+</head>
+
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<!-- Main -->
+<main class="container">
+    <h1 th:text="${'Comentario: ' + punto.nombre}">Comentario: </h1>
+    <div>
+        <form action="#" th:action="@{/addComentario(puntoId=${punto.puntoId})}" th:object="${comentario}"
+              method="post">
+            <label for="titulo"> Titulo </label>
+            <input th:field="*{titulo}" type="text" name="titulo"
+                   th:aria-invalid="${#fields.hasErrors('titulo') ? 'true' : ''}" aria-describedby="titulo-error"
+                   required>
+            <small id="titulo-error" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></small>
+            <label for="descripcion"> Descripcion </label>
+            <textarea th:field="*{descripcion}" name="descripcion"></textarea>
+            <input type="submit" value="Crear">
+        </form>
+    </div>
+</main>
+</body>
+
+</html>

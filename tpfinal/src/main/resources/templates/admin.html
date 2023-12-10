@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org" data-theme="dark"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Administración</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.0-alpha1/css/pico.min.css"/>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <link rel="stylesheet" href="../static/css/global.css" th:href="@{/css/global.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<main class="container">
+    <section>
+        <h1>Turistas</h1>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="turista : ${turistas}" th:object="${turista}">
+                <td th:text="*{nombre}">Nombre</td>
+                <td th:text="*{rol}">Rol</td>
+                <td>
+                    <form th:unless="*{turistaId} eq ${turistaActual.turistaId}"
+                          th:action="@{/deleteTurista(turista_id=*{turistaId})}" method="post">
+                        <button><span class="material-symbols-outlined">delete</span></button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <a href="./addTurista.html" th:href="@{/addTurista}">
+                        <span class="material-symbols-outlined">
+                            add_circle
+                        </span> Añadir turista</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h1>Puntos de interés</h1>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Imagen</th>
+                <th>Creador</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="punto : ${puntos}" th:object="${punto}">
+                <td th:text="*{nombre}">Nombre</td>
+                <td th:text="*{descripcion}" class="ellipsis" style="max-width: 40ch">Descripción</td>
+                <td style="max-width: .75rem"><img th:src="*{imagenUrl}" alt="imagen de punto"
+                                                   th:alt="'imagen ' + *{nombre}"></td>
+                <td th:text="*{turista.nombre}">Creador</td>
+                <td>
+                    <form th:action="@{/deletePunto(punto_id=*{puntoId})}" method="post">
+                        <button><span class="material-symbols-outlined">delete</span></button>
+                    </form>
+                    <!--                    <form th:action="@{/addPunto(punto_id=*{puntoId})}" method="get">-->
+                    <a th:href="@{/addPunto(punto_id=*{puntoId})}">
+                        <button type="button"><span class="material-symbols-outlined">edit</span></button>
+                    </a>
+                    <!--                    </form>-->
+                </td>
+            </tr>
+            <tr>
+                <td colspan="52">
+                    <a href="./addPunto.html" th:href="@{/addPunto}">
+                        <span class="material-symbols-outlined">
+                            add_circle
+                        </span> Añadir punto de interés</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+</main>
+
+</body>
+</html>

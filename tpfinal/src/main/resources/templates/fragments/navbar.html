@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Navbar</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.0-alpha1/css/pico.min.css"/>
+    <link rel="stylesheet" href="../../static/css/global.css" th:href="@{/css/global.css}">
+</head>
+<body>
+<nav th:fragment="navbar" class="container-fluid">
+    <ul>
+        <li>
+            <!--            <a href="../index.html" th:href="@{/}" class="contrast"><strong>Turismo</strong></a>-->
+            <span class="contrast"><strong>Turismo</strong></span>
+        </li>
+        <li>
+            <a
+                    href="../puntos.html"
+                    th:href="@{/}"
+                    class="secondary"
+            >
+                Puntos de interés
+            </a>
+        </li>
+        <li sec:authorize="hasAuthority('ADMIN')">
+            <a
+                    href="../admin.html"
+                    th:href="@{/admin}"
+                    class="secondary"
+            >
+                Administración
+            </a>
+        </li>
+    </ul>
+    <ul sec:authorize="isAuthenticated()">
+        <li>
+            <a
+                    href="../turista.html"
+                    th:href="@{/turista}"
+                    class="contrast"
+                    sec:authentication="name"
+            >Nombre de usuario</a>
+        </li>
+        <li>
+            <a
+                    href="../login.html"
+                    th:href="@{/logout}"
+            >
+                Cerrar sesión
+            </a>
+        </li>
+    </ul>
+    <ul sec:authorize="!isAuthenticated()">
+        <li>
+            <a
+                    class="contrast"
+                    href="../login.html"
+                    th:href="@{/login}"
+            >
+                Iniciar sesión
+            </a>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>

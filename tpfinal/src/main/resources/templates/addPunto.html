@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org" data-theme="dark">
+
+<head>
+    <title>Añadir punto de interés</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.0-alpha1/css/pico.min.css"/>
+    <link rel="stylesheet" href="../static/css/global.css" th:href="@{/css/global.css}">
+</head>
+
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<!-- Main -->
+<main class="container">
+    <div>
+        <form action="#" th:action="@{/addPunto}" th:object="${punto}" method="post" enctype="multipart/form-data">
+            <input readonly style="display: none;" aria-hidden="true" th:field="*{puntoId}">
+            <label for="nombre"> Nombre </label>
+            <input th:field="*{nombre}" type="text" name="nombre" required
+                   th:aria-invalid="${#fields.hasErrors('nombre') ? 'true' : ''}" aria-describedby="nombre-error">
+            <small id="nombre-error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+
+            <label for="descripcion"> Descripcion </label>
+            <textarea th:field="*{descripcion}"></textarea>
+
+            <label for="file"> URL de imagen </label>
+            <input type="file" id="file" name="file" required
+                   th:aria-invalid="${#fields.hasErrors('imagenUrl') ? 'true' : ''}" aria-describedby="file-error">
+            <small id="file-error" th:if="${#fields.hasErrors('imagenUrl')}" th:errors="*{imagenUrl}"></small>
+
+
+            <input type="submit" value="Crear">
+
+            <input style="display: none" readonly aria-hidden="true" th:field="*{turista.turistaId}" name="turista">
+        </form>
+    </div>
+</main>
+</body>
+
+</html>
